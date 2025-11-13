@@ -18,6 +18,8 @@ what-to-wear-dashboard/
 To run: 
 npm run start
 ngrok http 80
+cd client
+npm start
 
 then follow the links to the hosted proxy sites
 

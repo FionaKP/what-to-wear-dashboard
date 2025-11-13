@@ -1,17 +1,24 @@
 import axios from 'axios';
 
-const API_KEY = process.env.OPENWEATHER_API_KEY;
 const BASE_URL = 'https://api.openweathermap.org/data/2.5/weather';
 
-export const getWeather = async (city = 'Worcester', units = 'imperial') => {
+export const getWeather = async (apiKey, city = 'Worcester', units = 'imperial') => {
+  console.log('Fetching weather for:', city);
+  
+  if (!apiKey) {
+    throw new Error('API key is required');
+  }
+  
   try {
     const response = await axios.get(BASE_URL, {
       params: {
         q: city,
-        appid: API_KEY,
-        units: units // 'imperial' for Fahrenheit, 'metric' for Celsius
+        appid: apiKey,
+        units: units
       }
     });
+
+    console.log('Weather API response successful');
 
     return {
       temperature: Math.round(response.data.main.temp),
@@ -23,7 +30,7 @@ export const getWeather = async (city = 'Worcester', units = 'imperial') => {
       icon: response.data.weather[0].icon
     };
   } catch (error) {
-    console.error('Error fetching weather:', error.message);
+    console.error('Error fetching weather:', error.response?.data || error.message);
     throw new Error('Failed to fetch weather data');
   }
 };

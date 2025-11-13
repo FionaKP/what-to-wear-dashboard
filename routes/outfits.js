@@ -1,9 +1,18 @@
-import express from "express";
-import { addOutfit, getOutfits } from "../controllers/outfitController.js";
+import express from 'express';
+import {
+  getOutfits,
+  getOutfit,
+  addOutfit,
+  editOutfit,
+  removeOutfit
+} from '../controllers/outfitController.js';
 
 const router = express.Router();
 
-router.post("/", addOutfit);
-router.get("/", getOutfits);
+router.get('/', getOutfits);
+router.get('/:id', getOutfit);
+router.post('/', addOutfit);
+router.put('/:id', editOutfit);
+router.delete('/:id', removeOutfit);
 
 export default router;

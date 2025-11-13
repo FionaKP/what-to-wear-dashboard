@@ -8,7 +8,8 @@ export const weatherAPI = {
 };
 
 export const outfitAPI = {
-  getAll: () => axios.get(`${API_BASE_URL}/outfits`),
+  getAll: (params = {}) => axios.get(`${API_BASE_URL}/outfits`, { params }),
+  getById: (id) => axios.get(`${API_BASE_URL}/outfits/${id}`),
   create: (outfit) => axios.post(`${API_BASE_URL}/outfits`, outfit),
   update: (id, outfit) => axios.put(`${API_BASE_URL}/outfits/${id}`, outfit),
   delete: (id) => axios.delete(`${API_BASE_URL}/outfits/${id}`)
